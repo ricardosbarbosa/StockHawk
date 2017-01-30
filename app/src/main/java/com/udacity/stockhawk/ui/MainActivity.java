@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -64,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         swipeRefreshLayout.setRefreshing(true);
         onRefresh();
 
-        QuoteSyncJob.initialize(this);
-        getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
+        requestStocks();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -84,6 +84,25 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    private void requestStocks() {
+        //Se há	conexão disponível
+        if (networkUp()) {
+            QuoteSyncJob.initialize(this);
+            getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
+        } else {
+            //Se não há	conexão disponível, exibe a mensagem
+            View view = this.findViewById(R.id.recycler_view);
+            Snackbar snackbar = Snackbar.make(view, getString(R.string.error_no_network), Snackbar.LENGTH_LONG);
+            snackbar.setAction(getString(R.string.retry), new View.OnClickListener() {
+                //Ao clicar na snackbar, uma nova tentativa de atualizar a lista é efetuada :-)
+                @Override
+                public void onClick(View view) {
+                    requestStocks();
+                }
+            });
+            snackbar.show();
+        }
+    }
     private boolean networkUp() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -93,6 +112,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onRefresh() {
+
+        if (!networkUp()) {
+            //Se não há	conexão disponível, exibe a mensagem
+            View view = this.findViewById(R.id.recycler_view);
+            Snackbar snackbar = Snackbar.make(view, getString(R.string.error_no_network), Snackbar.LENGTH_LONG);
+            snackbar.setAction(getString(R.string.retry), new View.OnClickListener() {
+                //Ao clicar na snackbar, uma nova tentativa de atualizar a lista é efetuada :-)
+                @Override
+                public void onClick(View view) {
+                    requestStocks();
+                }
+            });
+            snackbar.show();
+        }
 
         QuoteSyncJob.syncImmediately(this);
 
