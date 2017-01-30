@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_add">إضافة</string>
+    <string name="dialog_cancel">إلغاء</string>
+    <string name="dialog_hint">رمز (e.g GOOG)</string>
+    <string name="dialog_title">إضافة أسهم</string>
+    <string name="error_no_network">أي شبكة اتصال! سيتم تحميل المؤشر الأسهم عندما تتوفر الشبكة.</string>
+    <string name="error_no_stocks">وأضافت يوجد مخزون! اضغط على زر عمل العائمة لإضافة واحد.</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="toast_stock_added_no_connectivity">الرمز%s المضافة. سيتم تحديث عندما افاعي الشبكة</string>
+    <string name="toast_no_connectivity">سيتم تحديث عندما شبكة المتاحة.</string>
+</resources>
