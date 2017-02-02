@@ -9,4 +9,5 @@
     <string name="retry">إعادة المحاولة</string>
     <string name="toast_stock_added_no_connectivity">الرمز%s المضافة. سيتم تحديث عندما افاعي الشبكة</string>
     <string name="toast_no_connectivity">سيتم تحديث عندما شبكة المتاحة.</string>
+    <string name="fab_button_content_description">زمرة لإضافة الأسهم الجديدة.</string>
 </resources>
