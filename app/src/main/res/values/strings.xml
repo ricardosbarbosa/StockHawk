@@ -33,5 +33,7 @@
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="retry">Retry</string>
     <string name="fab_button_content_description">Clique to add a new stock.</string>
+    <string name="string_symbol" translatable="false">Symbol</string>
+    <string name="title_activity_stock_detail" translatable="false">StockDetailActivity</string>
 
 </resources>
